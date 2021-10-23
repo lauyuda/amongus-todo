@@ -42,7 +42,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build a Docker image
-      run: docker build -t lauyuda//amongus-todo .
+      run: docker build -t lauyuda/amongus-todo .
     - name: Run Snyk to check Docker image for vulnerabilities
       # Snyk can be used to break the build when it detects vulnerabilities.
       # In this case we want to upload the issues to GitHub Code Scanning
@@ -58,6 +58,7 @@ jobs:
         args: --file=Dockerfile
 
   docker:
+    needs: snyk
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
@@ -77,6 +78,7 @@ jobs:
           tags: lauyuda/amongus-todo:latest
   
   heroku:
+    needs: docker
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
