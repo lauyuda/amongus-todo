@@ -5,7 +5,7 @@ WORKDIR /mydir
 
 # install app dependencies
 # source(host) target(image)
-COPY package*.json .
+COPY package*.json ./
 
 # executes on image
 RUN npm install
