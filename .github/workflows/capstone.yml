@@ -66,6 +66,7 @@ jobs:
           tags: lauyuda/amongus-todo:latest
   
   deploy:
+    needs: docker
     runs-on: ubuntu-18.04
     steps:
     - name: Get Github action IP
@@ -74,7 +75,7 @@ jobs:
     - name: Setting environment variables..
       run: |
         echo "AWS_DEFAULT_REGION=ap-southeast-1" >> $GITHUB_ENV
-        echo "AWS_SG_NAME=github_runner" >> $GITHUB_ENV
+        echo "AWS_SG_NAME=allow_ssh" >> $GITHUB_ENV
         
     - name: Add Github Actions IP to Security group
       run: |
