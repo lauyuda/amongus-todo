@@ -93,7 +93,10 @@ jobs:
         key: ${{ secrets.KEY }}
         script: |
           sudo yum check-update
-          sudo docker --version || sudo yum install -y docker.io
+          sudo yum update -y
+          sudo docker --version || sudo yum install -y docker
+          sudo su
+          systemctl start docker
           docker run -d --restart always -p 80:3000 lauyuda/amongus-todo:latest
               
     - name: Remove Github Actions IP from security group
